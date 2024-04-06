@@ -10,5 +10,7 @@ def home():
 def out():
     message = dict(request.form)['note']
     print(message)
-    #TODO: processing script
+    potential_diagnoses = scripts.test.out(message)
+    for diag in potential_diagnoses:
+        print(diag)
     return "Received"
