@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Medical Bias Corrector Input</title>
+  <link href="../static/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Medical Bias Corrector</h1>
+  <h3>Please enter a doctor's note to check for mistakes through bias during diagnosis</h3>
+  <form method="POST" action='/templates/loading'>
+    <label for="note"></label>
+    <textarea input type="text" id="note" name = "note"></textarea>
+    <br><br>
+    <button type="submit" id="submit">Submit</button>
+  </form>
+  <script src="../static/script.js"></script>
+</body>
+
+</html>
