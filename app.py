@@ -12,4 +12,4 @@ def out(potential = None):
     print("message" + message)
     potential_diagnoses = scripts.test.out(message)
     print(potential_diagnoses)
-    return render_template('/templatresults.html', potential=potential_diagnoses)
+    return render_template('/results.html', potential=potential_diagnoses)

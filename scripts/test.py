@@ -386,10 +386,9 @@ def out(input: str) -> str:
 
     diagnosesOutput = "Based on the doctor's note inputted, some medical symptoms you may be experiencing are "
     for count, problem in enumerate(identified_problems):
-        diagnosesOutput += problem
-        if count != len(identified_problems) - 2: diagnosesOutput += ", "
-        if count == len(identified_problems) - 2: diagnosesOutput += "and "
-    diagnosesOutput += "\n"
+        diagnosesOutput += problem + ", "
+        if count == len(identified_problems) - 2: diagnosesOutput += " and "
+    diagnosesOutput += "\n\n"
     for key, value in potential_diagnoses.items():
         percentage = (value / len(potential_diagnoses)) * 100
         diagnosesOutput += "Your symptoms are {:.2f}% consistent with {}.\n".format(percentage, key)
