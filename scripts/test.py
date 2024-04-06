@@ -2,7 +2,7 @@ import medspacy
 from medspacy.ner import TargetMatcher, TargetRule
 from spacy.tokens import Span
 
-def out(input: str) -> dict:
+def out(input: str) -> str:
     nlp = medspacy.load()
 
     target_matcher = nlp.get_pipe("medspacy_target_matcher")
@@ -364,21 +364,15 @@ def out(input: str) -> dict:
     import csv
 
 
-    # Analyze identified problems against the dataset
-    # Open the CSV file in read mode
     with open("C:\\Users\\shant\\Documents\\GitHub\\Shady\\scripts\\dataset.csv", 'r') as file:
-        # Create a CSV reader object
         csv_reader = csv.reader(file)
         
-        # Skip the header row
         next(csv_reader)
         
-        # Analyze identified problems against the dataset
         potential_diagnoses = {}
         for row in csv_reader:
             matched = 0
-            # Extract symptoms from the row
-            symptoms = row[1:]  # Skip the disease column
+            symptoms = row[1:]
             for problem in identified_problems:
                 for symptom in symptoms:
                     problemClean = problem.strip()
@@ -387,14 +381,22 @@ def out(input: str) -> dict:
                         matched += 1
             if matched > 0:
 
-                potential_diagnoses[row[0]] = matched  # Append the disease to potential diagnoses list
+                potential_diagnoses[row[0]] = matched
 
-    # Now potential_diagnoses list contains the possible diagnoses based on the identified symptoms
 
-    print(potential_diagnoses)
+    diagnosesOutput = "Based on the doctor's note inputted, some medical symptoms you may be experiencing are "
+    for count, problem in enumerate(identified_problems):
+        diagnosesOutput += problem
+        if count != len(identified_problems) - 2: diagnosesOutput += ", "
+        if count == len(identified_problems) - 2: diagnosesOutput += "and "
+    diagnosesOutput += "\n"
+    for key, value in potential_diagnoses.items():
+        percentage = (value / len(potential_diagnoses)) * 100
+        diagnosesOutput += "Your symptoms are {:.2f}% consistent with {}.\n".format(percentage, key)
 
     #potential_diagnoses = list(set(potential_diagnoses))
     # print("Potential Diagnoses:")
     # for diagnosis in potential_diagnoses:
     #     print(diagnosis)
-    return potential_diagnoses 
+    print(diagnosesOutput)
+    return diagnosesOutput
