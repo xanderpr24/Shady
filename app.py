@@ -7,9 +7,9 @@ def home():
     return render_template('/index.html')
 
 @app.route('/templates/loading', methods=['GET', 'POST'])
-def out():
+def out(potential = None):
     message = dict(request.form)['note']
     print("message" + message)
     potential_diagnoses = scripts.test.out(message)
     print(potential_diagnoses)
-    return "Received"
+    return render_template('/templatresults.html', potential=potential_diagnoses)
