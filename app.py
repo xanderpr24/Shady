@@ -9,8 +9,7 @@ def home():
 @app.route('/templates/loading', methods=['GET', 'POST'])
 def out():
     message = dict(request.form)['note']
-    print(message)
+    print("message" + message)
     potential_diagnoses = scripts.test.out(message)
-    for diag in potential_diagnoses:
-        print(diag)
+    print(potential_diagnoses)
     return "Received"
